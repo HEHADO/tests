@@ -39,7 +39,6 @@ void normalize(std::string& s1){
     s1.c_str();
 }
 
-
 int main(int argc, char const *argv[]) {
     std::list<Container, std::allocator<Container> > list;
     std::ifstream file;
