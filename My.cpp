@@ -38,7 +38,7 @@ void quickSort(T &str, const int left,const int right) noexcept {
         quickSort<T, L>(str, i, right);
 }
 //функция сортировки для данных
-void normalize(List& list){
+void normalize(List& list) noexcept {
     int i=-1;
     while (++i < list.size()) {
         if (list[i].count==1) continue;
@@ -47,7 +47,7 @@ void normalize(List& list){
     return;
 }
 //функция чтения пары ключ-данные
-void readCouple(std::ifstream& file, List& list){
+void readCouple(std::ifstream& file, List& list) noexcept {
     Container container;
     int i = 0;
     std::string body="";
