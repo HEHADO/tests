@@ -41,9 +41,7 @@ void quickSort(T &str, const int left,const int right) noexcept {
 void normalize(List& list){
     int i=-1;
     while (++i < list.size()) {
-        //++i;
         if (list[i].count==1) continue;
-        //cout<<list[i].key;
         quickSort<std::deque<std::string>, std::string>(list[i].body,0,list[i].body.size()-1);
     }
     return;
@@ -54,7 +52,6 @@ void readCouple(std::ifstream& file, List& list){
     int i = 0;
     std::string body="";
     file >> container.key >> body;
-    cout << container.key<< "   "<< body << '\n';
     if (container.key == "") return;
     if (body == "") {
         std::cerr << RED << "bad file\n" << COLORENDS;
@@ -109,5 +106,3 @@ int main(int argc, char const *argv[]) {
     }
     return 0;    
 }
-
-
