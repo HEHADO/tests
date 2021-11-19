@@ -10,31 +10,28 @@ using std::cout;
 // крнтейнер с данными
 class Container {
     public:
-    std::string body, key, real_key;
+    std::string key, real_key, body;
+    //std::list<std::string> body;
 };
 // функция сортировки, аналог qsort для строк
 void quickSort(std::string &str, const int left,const int right) noexcept {
-          int i = left, j = right;
-          int mid = str[(left + right) / 2];
-
-          /* partition */
-          while (i <= j) {
-                while (str[i] < mid)
-                      i++;
-                while (str[j] > mid)
-                      j--;
-                if (i <= j) {
-                      std::swap(str[i], str[j]);
-                      i++; j--;
-                }
-          };
-
-          /* recursion */
-          if (left < j)
-                quickSort(str, left, j);
-          if (i < right)
-                quickSort(str, i, right);
-    }
+    int i = left, j = right;
+    int mid = str[(left + right) / 2];
+    while (i <= j) {
+        while (str[i] < mid)
+            i++;
+        while (str[j] > mid)
+            j--;
+        if (i <= j) {
+            std::swap(str[i], str[j]);
+            i++; j--;
+        }
+    };
+    if (left < j)
+        quickSort(str, left, j);
+    if (i < right)
+        quickSort(str, i, right);
+}
 
 
 void normalize(std::string& s1){
@@ -51,19 +48,21 @@ int main(int argc, char const *argv[]) {
         file.open(argv[1]);
     } else {
         std::string s1;
-        cout << "write imput filename" << std::endl;
+        cout << RED << "Write the name of the input file" << COLORENDS << std::endl;
         cin >> s1;
         file.open(s1); 
     }
     if (!file.is_open()){
-        std::cerr << RED << "can't open input file\n" << COLORENDS;
+        std::cerr << RED << "Can't open input file\n" << COLORENDS;
         return 1;
     }
     // читаем файл  и создаем список контейнеров, в которых хранятся ключи с данными
     while (!file.eof()){
         Container container;
         file >> container.key >> container.body;
-        if ((container.key == "")||(container.body == "")) {
+        cout << container.key<< "   "<< container.body << '\n';
+        if (container.key == "") break;
+        if (container.body == "") {
             std::cerr << RED << "bad file\n" << COLORENDS;
             break;
         }
@@ -71,7 +70,11 @@ int main(int argc, char const *argv[]) {
         quickSort (container.real_key, 0, container.real_key.size() );
         list.push_front(container);
     }
-
+    while (list.size()>0) {
+        Container container = list.back();
+        list.pop_back();
+        cout << container.key<< "   "<< container.body << '\n';
+    }
     return 0;
 }
 
