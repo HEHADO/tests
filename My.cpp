@@ -47,11 +47,11 @@ void normalize(List& list) noexcept {
     return;
 }
 //функция чтения пары ключ-данные
-void readCouple(std::ifstream& file, List& list) noexcept {
+void readCouple(std::ifstream& file, List& list) {
     Container container;
     int i = 0;
     std::string body="";
-    file >> container.key >> body;
+    file >> container.key >> body; 
     if (container.key == "") return;
     if (body == "") {
         std::cerr << RED << "bad file\n" << COLORENDS;
